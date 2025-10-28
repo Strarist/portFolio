@@ -19,11 +19,20 @@ export const techIconMap: Record<string, JSX.Element> = {
 
 const projects = [
   {
+    title: "DeFAI",
+    description: "A DeFi AI Agent platform enabling blockchain transactions via natural language prompts",
+    thumbnail: "/project4.png",
+    techStack: ["react", "node", "express"],
+    gradient: "#51fbfb, rgb(13, 1, 60)",
+    github: "https://github.com/Ayushdas1904/Defai",
+    live: "https://defai-chi.vercel.app/",
+  },
+  {
     title: "ADfluence",
     description: "A creator brand collaboration website",
     thumbnail: "/project1.png",
     techStack: ["ts", "next", "mongo"],
-    gradient: "#51fbfb, rgb(13, 1, 60)",
+    gradient: "#ff7e5f, #0b1020",
     github: "https://github.com/Ayushdas1904/Adfluence",
     live: "https://adfluence-eosin.vercel.app/",
   },
@@ -45,6 +54,7 @@ const projects = [
     github: "https://github.com/Ayushdas1904/Hack-5.0-ProLingo",
     live: "https://prolingo-alpha.vercel.app/",
   },
+  
 ];
 
 export function Projects() {
