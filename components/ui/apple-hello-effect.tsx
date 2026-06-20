@@ -25,7 +25,8 @@ function AppleHelloEnglishEffect({
   onAnimationComplete,
   ...props
 }: Props) {
-  const calc = (x: number) => x * speed;
+  /** speed > 1 shortens durations (e.g. 2.2 → ~1.6s total hello draw) */
+  const calc = (x: number) => x / speed;
 
   return (
     <motion.svg

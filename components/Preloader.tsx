@@ -4,11 +4,9 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppleHelloEnglishEffect } from '@/components/ui/apple-hello-effect';
 
-/** English hello path finishes at delay(0.7) + duration(2.8) = 3.5s at speed=1 */
-const HELLO_BASE_MS = 3500;
-const HELLO_TARGET_MS = 2200;
-const HELLO_SPEED = HELLO_TARGET_MS / HELLO_BASE_MS;
-const FALLBACK_MS = HELLO_TARGET_MS + 300;
+/** Divisor passed to hello effect — 2.2 yields ~(0.7 + 2.8) / 2.2 ≈ 1.6s draw time */
+const HELLO_SPEED = 2.2;
+const FALLBACK_MS = 2200;
 const STORAGE_KEY = 'portfolio-hello-seen';
 
 export default function Preloader() {
