@@ -10,7 +10,8 @@ const HELLO_SPEED = 2.2;
 const FALLBACK_MS = 2200;
 
 export default function Preloader() {
-  const [visible, setVisible] = useState(shouldShowHelloPreloader);
+  // Must match SSR (false) — sessionStorage is read after mount to avoid hydration mismatch.
+  const [visible, setVisible] = useState(false);
   const [animDone, setAnimDone] = useState(false);
   const mountedRef = useRef(true);
 
@@ -21,6 +22,9 @@ export default function Preloader() {
 
   useEffect(() => {
     mountedRef.current = true;
+    if (shouldShowHelloPreloader()) {
+      setVisible(true);
+    }
     return () => {
       mountedRef.current = false;
     };
