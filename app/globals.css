@@ -17,11 +17,6 @@ body {
   isolation: isolate;
 }
 
-/* Hide portfolio until hello preloader finishes (set by inline boot script) */
-html.hello-pending .site-frame {
-  visibility: hidden;
-}
-
 .site-header-glow {
   position: fixed;
   top: 0;

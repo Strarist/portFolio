@@ -1,7 +1,26 @@
 export const HELLO_STORAGE_KEY = 'portfolio-hello-seen';
 
-/** Runs before React hydrates to prevent a flash of page content on first visit. */
-export const HELLO_BOOT_SCRIPT = `(function(){try{if(sessionStorage.getItem('${HELLO_STORAGE_KEY}')!=='1')document.documentElement.classList.add('hello-pending')}catch(e){document.documentElement.classList.add('hello-pending')}})();`;
+/** Inlined in <head> — must run before body paints. */
+export const HELLO_CRITICAL_CSS = `
+html:not(.hello-ready) .site-frame {
+  visibility: hidden !important;
+}
+#hello-static-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #050508;
+}
+html:not(.hello-ready) #hello-static-splash {
+  display: flex;
+}
+`;
+
+/** Return visitors: unlock portfolio before first paint. First visit: stay locked until hello finishes. */
+export const HELLO_BOOT_SCRIPT = `(function(){try{if(sessionStorage.getItem('${HELLO_STORAGE_KEY}')==='1'){document.documentElement.classList.add('hello-ready')}}catch(e){}})();`;
 
 export function shouldShowHelloPreloader(): boolean {
   if (typeof window === 'undefined') return false;
@@ -18,8 +37,5 @@ export function markHelloPreloaderSeen(): void {
   } catch {
     /* private browsing */
   }
-}
-
-export function clearHelloPending(): void {
-  document.documentElement.classList.remove('hello-pending');
+  document.documentElement.classList.add('hello-ready');
 }

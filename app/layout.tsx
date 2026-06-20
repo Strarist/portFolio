@@ -4,7 +4,11 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { poppins, instrumentSerif, jetbrainsMono } from "./font";
 import { siteDescription, siteName, siteTitle, siteUrl } from "@/lib/site";
-import { HELLO_BOOT_SCRIPT } from "@/lib/hello-preloader";
+import {
+  HELLO_BOOT_SCRIPT,
+  HELLO_CRITICAL_CSS,
+} from "@/lib/hello-preloader";
+import Preloader from "@/components/Preloader";
 
 const ClientShell = dynamic(() =>
   import("@/components/ClientShell").then((mod) => ({ default: mod.ClientShell }))
@@ -76,8 +80,19 @@ export default function RootLayout({
       className={`dark ${poppins.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <style
+          id="hello-critical"
+          dangerouslySetInnerHTML={{ __html: HELLO_CRITICAL_CSS }}
+        />
+        <script
+          id="hello-boot"
+          dangerouslySetInnerHTML={{ __html: HELLO_BOOT_SCRIPT }}
+        />
+      </head>
       <body className={`${poppins.className} antialiased`}>
-        <script dangerouslySetInnerHTML={{ __html: HELLO_BOOT_SCRIPT }} />
+        <div id="hello-static-splash" aria-hidden="true" />
+        <Preloader />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100000] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#e8390d] focus:text-white focus:text-sm focus:font-semibold"
