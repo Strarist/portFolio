@@ -1,18 +1,28 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppleHelloEnglishEffect } from '@/components/ui/apple-hello-effect';
+import {
+  clearHelloPending,
+  markHelloPreloaderSeen,
+  shouldShowHelloPreloader,
+} from '@/lib/hello-preloader';
 
 /** Divisor passed to hello effect — 2.2 yields ~(0.7 + 2.8) / 2.2 ≈ 1.6s draw time */
 const HELLO_SPEED = 2.2;
 const FALLBACK_MS = 2200;
-const STORAGE_KEY = 'portfolio-hello-seen';
 
 export default function Preloader() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(shouldShowHelloPreloader);
   const [animDone, setAnimDone] = useState(false);
   const mountedRef = useRef(true);
+
+  const dismiss = useCallback(() => {
+    setVisible(false);
+    clearHelloPending();
+    markHelloPreloaderSeen();
+  }, []);
 
   useEffect(() => {
     mountedRef.current = true;
@@ -22,40 +32,16 @@ export default function Preloader() {
   }, []);
 
   useEffect(() => {
-    try {
-      if (sessionStorage.getItem(STORAGE_KEY) === '1') return;
-    } catch {
-      /* private browsing — show once per load */
-    }
-    setVisible(true);
-  }, []);
-
-  useEffect(() => {
     if (!visible) return;
-    const fallback = setTimeout(() => {
-      setVisible(false);
-      try {
-        sessionStorage.setItem(STORAGE_KEY, '1');
-      } catch {
-        /* ignore */
-      }
-    }, FALLBACK_MS);
+    const fallback = setTimeout(dismiss, FALLBACK_MS);
     return () => clearTimeout(fallback);
-  }, [visible]);
+  }, [visible, dismiss]);
 
   useEffect(() => {
-    if (animDone) {
-      const t = setTimeout(() => {
-        setVisible(false);
-        try {
-          sessionStorage.setItem(STORAGE_KEY, '1');
-        } catch {
-          /* ignore */
-        }
-      }, 280);
-      return () => clearTimeout(t);
-    }
-  }, [animDone]);
+    if (!animDone) return;
+    const t = setTimeout(dismiss, 280);
+    return () => clearTimeout(t);
+  }, [animDone, dismiss]);
 
   return (
     <AnimatePresence>

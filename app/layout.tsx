@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { poppins, instrumentSerif, jetbrainsMono } from "./font";
 import { siteDescription, siteName, siteTitle, siteUrl } from "@/lib/site";
+import { HELLO_BOOT_SCRIPT } from "@/lib/hello-preloader";
 
 const ClientShell = dynamic(() =>
   import("@/components/ClientShell").then((mod) => ({ default: mod.ClientShell }))
@@ -76,6 +77,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className={`${poppins.className} antialiased`}>
+        <script dangerouslySetInnerHTML={{ __html: HELLO_BOOT_SCRIPT }} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100000] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#e8390d] focus:text-white focus:text-sm focus:font-semibold"
