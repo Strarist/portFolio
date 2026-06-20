@@ -25,7 +25,7 @@ function AppleHelloEnglishEffect({
   onAnimationComplete,
   ...props
 }: Props) {
-  const calc = (x: number) => x / speed;
+  const calc = (x: number) => x * speed;
 
   return (
     <motion.svg
