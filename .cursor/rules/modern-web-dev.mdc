@@ -1,0 +1,53 @@
+---
+description: Next.js, React, TypeScript, and Tailwind coding standards
+globs: **/*.{tsx,ts}
+alwaysApply: false
+---
+
+# Modern Web Dev Standards
+
+## Stack
+
+Next.js 15 App Router, React 19, TypeScript (strict), Tailwind CSS 4, Framer Motion, shadcn/ui.
+
+Use `@/` path aliases. Shared logic in `lib/`, UI in `components/`.
+
+## Server vs Client Components
+
+- Default to Server Components
+- Add `"use client"` only for hooks, event handlers, or browser APIs
+- Never mark static content as client just for convenience
+
+```tsx
+// ❌ BAD
+"use client";
+export default function About() { return <p>Hello</p>; }
+
+// ✅ GOOD
+export default function About() { return <p>Hello</p>; }
+```
+
+## Next.js Patterns
+
+- `next/image` for images, `next/link` for navigation, `next/font` for fonts
+- Export `metadata` / `generateMetadata` from server route files
+- Dynamic routes: `params` and `searchParams` are Promises in Next 15 — always await
+- Lazy-load heavy client UI via `dynamic(..., { ssr: false })` in `ClientShell` or page files
+
+## TypeScript
+
+- Explicit props interfaces; avoid `any`
+- Type-only imports: `import type { Metadata } from "next"`
+- Derive types from data sources instead of duplicating shapes
+
+## Performance
+
+- Split below-the-fold sections and effects into separate chunks
+- Set explicit image dimensions to prevent layout shift
+- Prefer CSS transitions over JS for simple hover/focus states
+- Do not run sync heavy work in client `useEffect` on mount
+
+## Quality
+
+- Run `npm run lint` and `npm run typecheck` after substantive changes
+- Minimize scope — focused diffs, no unrelated refactors

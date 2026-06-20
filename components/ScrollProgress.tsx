@@ -3,7 +3,7 @@
 import { motion, useScroll } from "framer-motion"
 
 export default function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress } = useScroll({ layoutEffect: false });
 
   return (
     <motion.div

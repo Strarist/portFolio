@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logo Design Preview</title>
+  <style>
+    body {
+      background-color: #0a0a0f;
+      color: #f5f5f7;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 30px;
+    }
+    .card {
+      background: #12121a;
+      border: 1px solid #222;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .logo-container {
+      background: #0a0a0f;
+      padding: 20px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>AG Logo Variants</h1>
+  <div class="grid">
+    <!-- Current implementation -->
+    <div class="card">
+      <h3>1. Current Logo</h3>
+      <div class="logo-container">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="8" y1="56" x2="28" y2="10" stroke="white" stroke-width="5" stroke-linecap="round"/>
+          <line x1="28" y1="10" x2="42" y2="56" stroke="white" stroke-width="5" stroke-linecap="round"/>
+          <line x1="15" y1="38" x2="35" y2="38" stroke="white" stroke-width="5" stroke-linecap="round"/>
+          <path d="M35 38 C42 22, 59 24, 59 40 C59 56, 50 59, 42 56" stroke="#e8390d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <line x1="59" y1="40" x2="48" y2="40" stroke="#e8390d" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Variant A: Centered G loop, overlapping bar -->
+    <div class="card">
+      <h3>2. Centered G, Overlapping Bar</h3>
+      <div class="logo-container">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- A structure (white) -->
+          <line x1="10" y1="54" x2="28" y2="12" stroke="white" stroke-width="5" stroke-linecap="round"/>
+          <line x1="28" y1="12" x2="42" y2="54" stroke="white" stroke-width="5" stroke-linecap="round"/>
+          <line x1="17" y1="39" x2="35" y2="39" stroke="white" stroke-width="5" stroke-linecap="round"/>
+          
+          <!-- G continuation (brand orange) -->
+          <!-- A's right leg is x = 36.5 at y = 39. Let's make G loop center at y = 39 -->
+          <!-- We start from right leg at y = 26 (approx x = 32.5), curve up/right, then down, then back to right leg at y = 50 (approx x = 40.5) -->
+          <path d="M33 26 C43 14, 58 18, 58 39 C58 58, 44 60, 39 52" stroke="#e8390d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- G horizontal bar starts at outer edge x = 58 and goes left to x = 32 (crossing right leg of A) -->
+          <line x1="58" y1="39" x2="32" y2="39" stroke="#e8390d" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Variant B: Cleaner curves and more natural flow -->
+    <div class="card">
+      <h3>3. Premium Monogram Flow</h3>
+      <div class="logo-container">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- A structure (white) -->
+          <line x1="10" y1="52" x2="27" y2="12" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+          <line x1="27" y1="12" x2="41" y2="52" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+          <line x1="17" y1="38" x2="34" y2="38" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+          
+          <!-- G: a clean backward C-arc that begins at y=24 on right leg, curves right and down, ending at y=48 on right leg -->
+          <path d="M32.5 25 C45 13, 59 20, 59 38 C59 54, 46 59, 39 49" stroke="#e8390d" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Horizontal bar: aligned with A's crossbar (y=38) extending from G outer curve to inside A -->
+          <line x1="59" y1="38" x2="30" y2="38" stroke="#e8390d" stroke-width="5.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Variant C: Exact copy of reference image details -->
+    <div class="card">
+      <h3>4. Exact Ref Image Geometry</h3>
+      <div class="logo-container">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- A structure (white) -->
+          <line x1="14" y1="52" x2="28" y2="12" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+          <line x1="28" y1="12" x2="40" y2="52" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+          <line x1="20" y1="38" x2="34" y2="38" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+          
+          <!-- G (brand orange): a perfect mirrored-G/backward C loop -->
+          <!-- Starting on right leg at y=26 (x=33), curving up to y=16 (x=45), right to x=56, down to y=40, curving left to y=48 (x=39) -->
+          <!-- The horizontal bar of G goes from x=56 to x=32 at y=38 -->
+          <path d="M33 26 C40 14, 56 16, 56 36 C56 52, 44 54, 39 47" stroke="#e8390d" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <line x1="56" y1="36" x2="31" y2="36" stroke="#e8390d" stroke-width="5.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

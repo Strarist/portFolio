@@ -1,65 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { FaXTwitter } from 'react-icons/fa6';
-import { FiGithub, FiLinkedin } from 'react-icons/fi';
+import React from 'react';
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 
 export default function Socials() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
-    }
-  }, []);
-
-  const lightShadow = {
-    boxShadow: `
-      rgba(0, 0, 0, 0.5) 0px 15px 25px,
-      rgba(0, 0, 0, 0.35) 0px 10px 15px,
-      rgba(0, 0, 0, 0.25) 0px 4px 6px
-    `
-  };
-
-  const darkShadow = {
-    boxShadow: `
-      rgba(200, 200, 200, 0.2) 2px 2px 6px,
-      rgba(160, 160, 160, 0.15) 0px 6px 10px
-    `
-  };
-
-  const hoverClass = isDarkMode
-    ? 'hover:brightness-200'
-    : 'hover:brightness-90';
-
   return (
-    <div className="mt-6 flex gap-4">
+    <div className="flex gap-4 sm:gap-6 justify-center">
       <a
-        href="https://github.com/Ayushdas1904"
+        href="https://github.com/Strarist"
         target="_blank"
         rel="noopener noreferrer"
-        className={`p-5 rounded-lg transition-all duration-300 transform hover:-translate-y-[4px] dark:brightness-75 ${hoverClass}`}
-        style={isDarkMode ? darkShadow : lightShadow}
+        className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-900 border border-white/8 text-zinc-300 transition-all duration-300 transform hover:-translate-y-[4px] hover:shadow-[0_10px_25px_rgba(232,57,13,0.35)] hover:border-[#e8390d] hover:text-[#e8390d]"
+        aria-label="GitHub Profile"
       >
-        <FiGithub className="w-6 h-6" />
+        <FiGithub className="w-7 h-7" />
       </a>
 
       <a
-        href="https://www.linkedin.com/in/ayush-das-4674a1239/"
+        href="https://linkedin.com/in/adigupta1620"
         target="_blank"
         rel="noopener noreferrer"
-        className={`p-5 rounded-lg transition-all duration-300 transform hover:-translate-y-[4px] dark:brightness-75 ${hoverClass}`}
-        style={isDarkMode ? darkShadow : lightShadow}
+        className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-900 border border-white/8 text-zinc-300 transition-all duration-300 transform hover:-translate-y-[4px] hover:shadow-[0_10px_25px_rgba(232,57,13,0.35)] hover:border-[#e8390d] hover:text-[#e8390d]"
+        aria-label="LinkedIn Profile"
       >
-        <FiLinkedin className="w-6 h-6" />
+        <FiLinkedin className="w-7 h-7" />
       </a>
 
       <a
-        href="https://x.com/das_codes"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`p-5 rounded-lg transition-all duration-300 transform hover:-translate-y-[4px] dark:brightness-75 ${hoverClass}`}
-        style={isDarkMode ? darkShadow : lightShadow}
+        href="mailto:2002guptaadi@gmail.com"
+        className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-900 border border-white/8 text-zinc-300 transition-all duration-300 transform hover:-translate-y-[4px] hover:shadow-[0_10px_25px_rgba(232,57,13,0.35)] hover:border-[#e8390d] hover:text-[#e8390d]"
+        aria-label="Send Email"
       >
-        <FaXTwitter className="w-6 h-6" />
+        <FiMail className="w-7 h-7" />
       </a>
     </div>
   );

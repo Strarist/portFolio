@@ -1,0 +1,41 @@
+---
+description: React component patterns for portfolio sections and UI
+globs: components/**/*.{tsx,ts}
+alwaysApply: false
+---
+
+# Component Patterns
+
+## Section Components (`navPages/`)
+
+- One file per portfolio section; export a named component (e.g. `export function Projects`)
+- Add `id` attributes matching navbar hash links (`id="projects"`, `scroll-mt-28` for offset)
+- Mark `"use client"` only when using hooks, Framer Motion, or browser APIs
+
+## Global Client Shell
+
+Heavy or browser-only UI lives in `ClientShell` — not in `layout.tsx`. Load with `dynamic(..., { ssr: false })`:
+
+```tsx
+const BackgroundParticles = dynamic(
+  () => import("@/components/ui/BackgroundParticles"),
+  { ssr: false }
+);
+```
+
+Applies to: particles, custom cursor, preloader, scroll progress, scroll-to-top.
+
+## Code Splitting on Main Page
+
+`app/page.tsx` lazy-loads below-the-fold sections with `dynamic()`. Keep `Home` eager; defer Experience, Projects, Footer, etc.
+
+## UI Primitives
+
+- shadcn/ui components live in `components/ui/` (New York style, Lucide icons)
+- Merge classes with `cn()` from `@/lib/utils` — never raw string concatenation
+- Icons: prefer `lucide-react`; use `react-icons` only where already established
+
+## Navbar & Navigation
+
+- Internal section links use `/#section` hash URLs
+- Blog routes use `next/link` with pathname-aware logo behavior (see `Navbar.tsx`)

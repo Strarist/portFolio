@@ -1,0 +1,52 @@
+---
+description: Blog posts, markdown content, and article pages
+globs: content/**/*,app/blog/**/*,lib/blog.ts,components/MarkdownRenderer.tsx
+alwaysApply: false
+---
+
+# Blog & Content
+
+## Adding a Post
+
+1. Create `content/posts/{slug}.md` — slug becomes the URL (`/blog/{slug}`)
+2. Include YAML frontmatter:
+
+```yaml
+---
+title: "Post Title"
+date: "2026-06-18"
+summary: "One-line description for SEO and cards"
+tags: ["Tag1", "Tag2"]
+---
+```
+
+3. Posts are read at build time via `lib/blog.ts` (no external markdown library)
+
+## Supported Markdown
+
+`MarkdownRenderer` is custom and limited. Supported syntax:
+
+- `##` / `###` headings, paragraphs, `---` dividers
+- `**bold**`, `` `inline code` ``, `[text](url)` links
+- Fenced code blocks with language tag
+- Blockquotes (`>`)
+
+Do not use features outside this set (tables, footnotes, HTML embeds) without extending the renderer first.
+
+## Article Pages
+
+- Server Components with `generateStaticParams()` and `generateMetadata()`
+- Next.js 15: `params` is a Promise — always `await params`
+
+```tsx
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  // ...
+}
+```
+
+- Use `jetbrainsMono` font class on blog pages; accent color `#e8390d` for metadata icons

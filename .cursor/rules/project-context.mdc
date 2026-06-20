@@ -1,0 +1,39 @@
+---
+description: Portfolio project structure, routing, and core conventions
+alwaysApply: true
+---
+
+# Portfolio Project Context
+
+Personal portfolio for Aditya Gupta — Next.js 15 App Router, React 19, TypeScript, Tailwind CSS 4.
+
+## Directory Layout
+
+| Path | Purpose |
+|------|---------|
+| `app/` | Routes, layout, fonts, global CSS, providers |
+| `components/navPages/` | Single-page portfolio sections (Home, Experience, Projects, …) |
+| `components/ui/` | shadcn-style primitives and effects |
+| `lib/` | Shared utilities (`utils.ts`, `blog.ts`, `site.ts`) |
+| `content/posts/` | Blog markdown with YAML frontmatter |
+| `public/` | Static assets (resume, icons, project images) |
+
+## Routing
+
+- `/` — main portfolio (all sections on one page, hash anchors like `#home`, `#projects`)
+- `/blog` — article index; `/blog/[slug]` — individual posts
+- `/home` redirects to `/` (see `app/home/page.tsx`)
+
+## Site Config
+
+Centralize URLs and metadata in `@/lib/site`. Use `NEXT_PUBLIC_SITE_URL` in production.
+
+## Commands
+
+After substantive changes: `npm run lint` and `npm run typecheck`. Use `npm run dev:clean` if the dev cache misbehaves.
+
+## Agent Guidelines
+
+- Match existing patterns in neighboring files before adding abstractions
+- Keep diffs focused — no drive-by refactors or unrelated changes
+- Do not commit `.next/`, `.env`, or generated build artifacts

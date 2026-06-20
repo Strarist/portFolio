@@ -1,0 +1,40 @@
+---
+description: Visual design tokens, typography, and dark-theme styling
+globs: **/*.{tsx,css}
+alwaysApply: false
+---
+
+# Design & Brand
+
+## Theme
+
+Dark-only site. `Providers` forces `dark` theme — do not add light-mode variants unless explicitly requested.
+
+## Color Palette
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| Background | `#0a0a0f` | Page base (`globals.css`) |
+| Foreground | `#f5f5f7` | Body text |
+| Accent | `#e8390d` | CTAs, links, highlights, icons |
+| Muted | `zinc-400` / `slate-900` | Secondary text, borders, cards |
+
+Use the accent sparingly — hover states, key actions, and emphasis only.
+
+## Typography
+
+- **Body/UI**: `poppins` from `@/app/font` (applied in root layout)
+- **Blog/code**: `jetbrainsMono` — apply via `className={jetbrainsMono.className}` on blog pages
+
+## Motion & Accessibility
+
+- Respect `prefers-reduced-motion` for Framer Motion and scroll effects
+- Keep animations subtle; stagger hero reveals, avoid blocking first paint
+- Include meaningful `alt` text and `aria-*` where interactive
+- Skip-to-content link exists in layout — preserve it when editing `layout.tsx`
+
+## Layout
+
+- Mobile-first Tailwind breakpoints (`sm:`, `md:`, `lg:`)
+- Portfolio sections: `max-w-7xl` containers, generous vertical padding
+- Blog articles: `max-w-4xl` prose width
