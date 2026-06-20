@@ -10,9 +10,17 @@ import {
   Contact,
 } from "lucide-react";
 import { NavBar } from "@/components/ui/tubelight-navbar";
-import { CommandPalette } from "@/components/ui/CommandPalette";
 import { Logo } from "@/components/ui/Logo";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const CommandPalette = dynamic(
+  () =>
+    import("@/components/ui/CommandPalette").then((mod) => ({
+      default: mod.CommandPalette,
+    })),
+  { ssr: false }
+);
 
 const navItems = [
   { name: "Home", url: "/#home", icon: Home },
@@ -66,7 +74,7 @@ export function Navbar() {
         </Link>
       </div>
       <NavBar items={navItems} onCommandOpen={handleOpen} />
-      <CommandPalette open={cmdOpen} onClose={handleClose} />
+      {cmdOpen ? <CommandPalette open={cmdOpen} onClose={handleClose} /> : null}
     </>
   );
 }

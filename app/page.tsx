@@ -1,6 +1,9 @@
 import React from "react";
-import { Home } from "@/components/navPages/Home";
 import dynamic from "next/dynamic";
+
+const Home = dynamic(() =>
+  import("@/components/navPages/Home").then((mod) => ({ default: mod.Home }))
+);
 
 const Experience = dynamic(() => import("@/components/navPages/Experience"));
 const Projects = dynamic(
@@ -17,7 +20,7 @@ const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col items-center scroll-smooth min-h-screen bg-transparent text-foreground relative z-10 overflow-x-hidden pb-24 sm:pb-0">
+    <main id="main-content" className="flex flex-col items-center scroll-smooth min-h-screen bg-transparent text-foreground relative z-10 overflow-x-hidden pb-24 sm:pb-0">
       <Home />
       <Experience />
       <Projects />

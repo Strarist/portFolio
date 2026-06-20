@@ -6,7 +6,6 @@ import { BlogHero } from "@/components/blog/BlogHero";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 
 export const metadata: Metadata = {
-  title: "Blog",
   description: "Technical articles on software engineering, AI systems, and cloud-native development.",
 };
 

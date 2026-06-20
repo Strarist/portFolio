@@ -1,13 +1,25 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import { Providers } from "./providers";
-import { poppins } from "./font";
-import { Navbar } from "@/components/Navbar";
-import { ClientShell } from "@/components/ClientShell";
-import { SiteShell } from "@/components/SiteShell";
-import { Cursor } from "@/components/ui/Cursor";
-import { Toaster } from "sonner";
+import { poppins, instrumentSerif, jetbrainsMono } from "./font";
 import { siteDescription, siteName, siteTitle, siteUrl } from "@/lib/site";
+
+const ClientShell = dynamic(() =>
+  import("@/components/ClientShell").then((mod) => ({ default: mod.ClientShell }))
+);
+
+const DeferredUi = dynamic(() =>
+  import("@/components/DeferredUi").then((mod) => ({ default: mod.DeferredUi }))
+);
+
+const SiteShell = dynamic(() =>
+  import("@/components/SiteShell").then((mod) => ({ default: mod.SiteShell }))
+);
+
+const Navbar = dynamic(() =>
+  import("@/components/Navbar").then((mod) => ({ default: mod.Navbar }))
+);
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -58,22 +70,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={poppins.className}>
+    <html
+      lang="en"
+      className={`dark ${poppins.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className={`${poppins.className} antialiased`}>
         <a
-          href="#home"
+          href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100000] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#e8390d] focus:text-white focus:text-sm focus:font-semibold"
         >
           Skip to content
         </a>
         <Providers>
           <ClientShell />
-          <Cursor />
+          <DeferredUi />
           <SiteShell>
             <Navbar />
             {children}
           </SiteShell>
-          <Toaster richColors position="bottom-right" />
         </Providers>
       </body>
     </html>

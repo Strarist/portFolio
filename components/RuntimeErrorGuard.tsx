@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-
-const RELOAD_KEY = 'portfolio-chunk-reload';
+import { reloadDevOnce } from '@/lib/dev-reload';
 
 function isChunkLoadFailure(reason: unknown): boolean {
   if (reason instanceof Event) return true;
@@ -32,21 +31,8 @@ export function RuntimeErrorGuard() {
   useEffect(() => {
     const onRejection = (event: PromiseRejectionEvent) => {
       if (!isChunkLoadFailure(event.reason)) return;
-
       event.preventDefault();
-
-      if (process.env.NODE_ENV === 'development') {
-        console.warn('[portfolio] Recovering from chunk load failure — reloading once.');
-      }
-
-      try {
-        if (sessionStorage.getItem(RELOAD_KEY) === '1') return;
-        sessionStorage.setItem(RELOAD_KEY, '1');
-      } catch {
-        /* private browsing */
-      }
-
-      window.location.reload();
+      reloadDevOnce('Recovering from chunk load failure');
     };
 
     window.addEventListener('unhandledrejection', onRejection);
